@@ -21,7 +21,6 @@ network:
 ```
 - We should  install go,peer image of fabric, fabric binaries and  couch-db
 - This is the base tree configuration
-- Put the current path associated to the variables $FABRIC_CA_CLIENT_HOME and $FABRIC_CA_HOME
 ```
 ├── bin
 │   ├── configtxgen
@@ -42,6 +41,25 @@ network:
 ```
 - Now that we have the base for the peer, we can clone  the image and start from there to construct what we wish for a simple benchmarking
 # Orderer
+- In terms of networking the procedure is the same as the base peer
+- This is the tree  configuration for the base
+```
+├── bin
+│   ├── configtxgen
+│   ├── configtxlator
+│   ├── cryptogen
+│   ├── discover
+│   ├── fabric-ca-client
+│   ├── fabric-ca-server
+│   ├── ledgerutil
+│   ├── orderer
+│   ├── osnadmin
+│   └── peer
+├── blocks
+├── config
+├── install-fabric.sh
+└── ledger-vault
+``` 
 # Simple Network for the benchmarking
 ## peer1 (we are assuming that the client got established)
 - Register peer1 identity
@@ -143,3 +161,4 @@ fabric-ca-client enroll -d -u https://adm:12341234@localhost:7777  --id.type adm
     └── user
 ```
 - After this, we will configure a script to start the container, opening all  of the  necessary ports for establishing metrics and also configure the core.yaml file
+## orderer1
