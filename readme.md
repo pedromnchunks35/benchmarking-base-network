@@ -86,13 +86,13 @@ fabric-ca-client register -d -u https://localhost:7779 --id.name adm-iter --id.s
 ```
 fabric-ca-client enroll -d -u https://adm-iter:12341234@localhost:7779 --id.type admin --id.affiliation org1  --csr.names "C=PT,ST=Porto,L=Aliados,O=Universidade do minho" --csr.cn peer1  --tls.certfiles tls-root-cert/tls-root-cert.pem   --mspdir ../../cryptographic-materials/peer1/admin-msp
 ```
-- Register tls profile for org1
+- Register tls profile for org1 adm
 ```
-fabric-ca-client register -d -u https://localhost:7777 --id.name adm --id.secret 12341234 --id.type admin --id.affiliation org1 --csr.names  "C=PT,ST=Porto,L=Aliados,O=Universidade do minho" --csr.cn peer1  --tls.certfiles tls-root-cert/tls-ca-cert.pem --mspdir tls-ca/tlsadmin/msp/
+fabric-ca-client register -d -u https://localhost:7777 --id.name adm --id.secret 12341234 --id.type admin --id.affiliation org1 --csr.names  "C=PT,ST=Porto,L=Aliados,O=Universidade do minho" --csr.cn peer1  --tls.certfiles tls-root-cert/tls-ca-cert.pem --mspdir tls-ca/tlsadmin/msp/ --enrollment.profile tls
 ```
-- Enroll tls profile for org1
+- Enroll tls profile for org1 adm
 ```
-fabric-ca-client enroll -d -u https://adm:12341234@localhost:7777  --id.type admin --id.affiliation org1 --csr.names  "C=PT,ST=Porto,L=Aliados,O=Universidade do minho" --csr.cn peer1  --tls.certfiles tls-root-cert/tls-root-cert.pem --mspdir tls-msp/admin/msp
+fabric-ca-client enroll -d -u https://adm:12341234@localhost:7777  --id.type admin --id.affiliation org1 --csr.names  "C=PT,ST=Porto,L=Aliados,O=Universidade do minho" --csr.cn peer1  --tls.certfiles tls-root-cert/tls-root-cert.pem --mspdir tls-msp/admin/msp --enrollment.profile tls
 ```
 - After generating all of this cryptographic material, we can put it in the destinated vm, and the tree will be something like this:
 ```
@@ -162,3 +162,16 @@ fabric-ca-client enroll -d -u https://adm:12341234@localhost:7777  --id.type adm
 ```
 - After this, we will configure a script to start the container, opening all  of the  necessary ports for establishing metrics and also configure the core.yaml file
 ## orderer1
+- Register msp for orderer
+```
+fabric-ca-client register -d -u https://localhost:7779 --id.name orderer --id.secret 12341234 --id.type orderer --csr.cn orderer --csr.names "C=PT,ST=Porto,L=Aliados,O=Universidade do minho" --csr.hosts "192.168.1.101,orderer,127.0.0.1,localhost" --tls.certfiles tls-root-cert/tls-root-cert.pem --mspdir int-ca/iteradm/msp
+```
+- Enroll msp for orderer
+```
+fabric-ca-client enroll -d -u https://orderer:12341234@192.168.1.78:7779  --id.type orderer --csr.cn orderer --csr.names "C=PT,ST=Porto,L=Aliados,O=Universidade do minho" --csr.hosts "192.168.1.101,orderer,127.0.0.1,localhost" --tls.certfiles tls-root-cert/tls-root-cert.pem --mspdir ../../cryptographic-materials/orderer1/msp
+```
+- register orderer tls
+```
+fabric-ca-client register -d -u https://localhost:7777 --id.name orderer --id.secret 12341234 --id.type orderer --csr.cn orderer --csr.names "C=PT,ST=Porto,L=Aliados,O=Universidade do minho" --csr.hosts "192.168.1.101,orderer,127.0.0.1,localhost" --tls.certfiles tls-root-cert/tls-root-cert.pem --mspdir tls-ca/iteradm/msp
+```
+- enroll orderer tls

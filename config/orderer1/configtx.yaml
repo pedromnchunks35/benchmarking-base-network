@@ -21,7 +21,7 @@ Organizations:
         # ID to load the MSP definition as
         ID: Org1MSP
 
-        MSPDir: ../org1/msp
+        MSPDir: ../msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -162,8 +162,8 @@ Orderer: &OrdererDefaults
         Consenters:
         - Host: 192.168.1.101
           Port: 7050
-          ClientTLSCert: ../org1/orderer/tls-msp/signcerts/cert.pem
-          ServerTLSCert: ../org1/orderer/tls-msp/signcerts/cert.pem
+          ClientTLSCert: ../tls-msp/signcerts/cert.pem
+          ServerTLSCert: ../tls-msp/signcerts/cert.pem
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
