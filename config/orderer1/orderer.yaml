@@ -25,10 +25,10 @@ General:
         Enabled: true
         ## ! THIS IS THE ORDER TLS PRIVATE KEY
         # PrivateKey governs the file location of the private key of the TLS certificate.
-        PrivateKey: /tmp/hyperledger/deploy-orderer/org1/orderer/tls-msp/keystore/key.pem
+        PrivateKey: /tmp/hyperledger/deploy-orderer/tls-msp/keystore/key.pem
         ## ! THIS IS THE ORDERER TLS PUBLIC KEY
         # Certificate governs the file location of the server TLS certificate.
-        Certificate: /tmp/hyperledger/deploy-orderer/org1/orderer/tls-msp/signcerts/cert.pem
+        Certificate: /tmp/hyperledger/deploy-orderer/tls-msp/signcerts/cert.pem
         # RootCAs contains a list of additional root certificates used for verifying certificates
         # of other orderer nodes during outbound connections.
         # It is not required to be set, but can be used to augment the set of TLS CA certificates
@@ -110,7 +110,7 @@ General:
     # LocalMSPDir is where to find the private crypto material needed by the
     # orderer. It is set relative here as a default for dev environments but
     # should be changed to the real location in production.
-    LocalMSPDir: /tmp/hyperledger/deploy-orderer/org1/orderer/msp
+    LocalMSPDir: /tmp/hyperledger/deploy-orderer/msp
     #! THIS IS THE ID OF THE LOCAL MSP OF THE ORDERER (WE SHOULD PUT THE MSP OF THE ORGANIZATION, OTHERWISE IT WILL FAIL IN THE COMMUNICATION)
     # LocalMSPID is the identity to register the local MSP material with the MSP
     # manager. IMPORTANT: The local MSP ID of an orderer needs to match the MSP
@@ -206,7 +206,7 @@ Debug:
 ################################################################################
 Operations:
     # host and port for the operations server
-    ListenAddress: 0.0.0.0:8443
+    ListenAddress: 0.0.0.0:9443
 
     # TLS configuration for the operations endpoint
     TLS:
@@ -248,7 +248,7 @@ Metrics:
 Admin:
     #! Address which the admin will use to manage the orderer
     # host and port for the admin server
-    ListenAddress: 127.0.0.1:7053
+    ListenAddress: 0.0.0.0:7053
   
     # TLS configuration for the admin endpoint
     TLS:
@@ -257,10 +257,10 @@ Admin:
         Enabled: true
         #! The tls public key of the orderer again
         # Certificate is the location of the PEM encoded TLS certificate
-        Certificate: /tmp/hyperledger/deploy-orderer/org1/orderer/tls-msp/signcerts/cert.pem
+        Certificate: /tmp/hyperledger/deploy-orderer/tls-msp/signcerts/cert.pem
         #! The tls private key of the orderer again
         # PrivateKey points to the location of the PEM-encoded key
-        PrivateKey: /tmp/hyperledger/deploy-orderer/org1/orderer/tls-msp/keystore/key.pem
+        PrivateKey: /tmp/hyperledger/deploy-orderer/tls-msp/keystore/key.pem
 
         # Most admin service endpoints require client authentication when TLS
         # is enabled. ClientAuthRequired requires client certificate authentication
@@ -272,7 +272,7 @@ Admin:
 
         # Paths to PEM encoded ca certificates to trust for client authentication
         #! Should contain the root CA's of the client admins (im am placing the tls root ca, since it is the same org in this case)
-        ClientRootCAs: [/tmp/hyperledger/deploy-orderer/org1/orderer/tls-msp/tlscacerts/tls-192-168-1-78-7777.pem]
+        ClientRootCAs: [/tmp/hyperledger/deploy-orderer/tls-msp/tlscacerts/tls-192-168-1-78-7777.pem]
 
 ################################################################################
 #
