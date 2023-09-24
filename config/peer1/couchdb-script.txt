@@ -1,0 +1,12 @@
+sudo docker run \
+    -d \
+    -p 5989:5984 \
+    -e COUCHDB_BIND_ADDRESS=127.0.0.1 \
+    -e COUCHDB_USER=admin \
+    -e COUCHDB_PASSWORD=12341234 \
+    -v /home/peer/peer/data-vault/:/opt/couchdb/data \
+    --name couch-peer1 \
+    couchdb
+curl -X PUT http://admin:12341234@localhost:5989/_users
+curl -X PUT http://admin:12341234@127.0.0.1:5989/_replicator
+curl -X PUT http://admin:12341234@localhost:5989/_global_changes

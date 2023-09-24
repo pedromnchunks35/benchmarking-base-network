@@ -76,3 +76,70 @@ fabric-ca-client register -d -u https://localhost:7777 --id.name adm --id.secret
 ```
 fabric-ca-client enroll -d -u https://adm:12341234@localhost:7777  --id.type admin --id.affiliation org1 --csr.names  "C=PT,ST=Porto,L=Aliados,O=Universidade do minho" --csr.cn peer1  --tls.certfiles tls-root-cert/tls-root-cert.pem --mspdir tls-msp/admin/msp
 ```
+- After generating all of this cryptographic material, we can put it in the destinated vm, and the tree will be something like this:
+```
+├── admin-msp
+│   ├── cacerts
+│   │   └── localhost-7779.pem
+│   ├── intermediatecerts
+│   │   └── localhost-7779.pem
+│   ├── IssuerPublicKey
+│   ├── IssuerRevocationPublicKey
+│   ├── keystore
+│   │   └── key.pem
+│   ├── signcerts
+│   │   └── cert.pem
+│   └── user
+├── bin
+│   ├── configtxgen
+│   ├── configtxlator
+│   ├── cryptogen
+│   ├── discover
+│   ├── fabric-ca-client
+│   ├── fabric-ca-server
+│   ├── ledgerutil
+│   ├── orderer
+│   ├── osnadmin
+│   └── peer
+├── chaincode
+├── config
+│   ├── basic.tar.gz
+│   └── core.yaml
+├── data-vault
+├── install-fabric.sh
+├── msp
+│   ├── cacerts
+│   │   └── 192-168-1-78-7779.pem
+│   ├── intermediatecerts
+│   │   └── 192-168-1-78-7779.pem
+│   ├── IssuerPublicKey
+│   ├── IssuerRevocationPublicKey
+│   ├── keystore
+│   │   └── key.pem
+│   ├── signcerts
+│   │   └── cert.pem
+│   └── user
+├── snapshots
+├── tls-msp
+│   ├── cacerts
+│   ├── IssuerPublicKey
+│   ├── IssuerRevocationPublicKey
+│   ├── keystore
+│   │   └── key.pem
+│   ├── signcerts
+│   │   └── cert.pem
+│   ├── tlscacerts
+│   │   └── tls-192-168-1-78-7777.pem
+│   └── user
+└── tls-msp-admin
+    ├── cacerts
+    │   └── localhost-7777.pem
+    ├── IssuerPublicKey
+    ├── IssuerRevocationPublicKey
+    ├── keystore
+    │   └── key.pem
+    ├── signcerts
+    │   └── cert.pem
+    └── user
+```
+- After this, we will configure a script to start the container, opening all  of the  necessary ports for establishing metrics and also configure the core.yaml file
