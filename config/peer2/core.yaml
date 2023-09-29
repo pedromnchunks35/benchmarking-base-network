@@ -189,7 +189,7 @@ peer:
         # This is an endpoint that is published to peers outside of the organization.
         # If this isn't set, the peer will not be known to other organizations and will not be exposed via service discovery.
         #! ADDRESS WHERE OTHERS CAN FIND YOU FROM OTHER ORGANIZATIONS
-        externalEndpoint: 192.168.1.100:7051
+        externalEndpoint: 192.168.1.230:7051
         # Leader election service configuration
         election:
             # Longest time peer waits for stable membership during leader election startup (unit: second)
