@@ -4,8 +4,8 @@ sudo docker run \
     -e COUCHDB_BIND_ADDRESS=127.0.0.1 \
     -e COUCHDB_USER=admin \
     -e COUCHDB_PASSWORD=12341234 \
-    -v /home/couch-db/:/opt/couchdb/data \
-    --name couch-peer1 \
+    -v /home/couchdb/:/opt/couchdb/data \
+    --name couchdb \
     couchdb
 curl -X PUT http://admin:12341234@localhost:5989/_users
 curl -X PUT http://admin:12341234@127.0.0.1:5989/_replicator
